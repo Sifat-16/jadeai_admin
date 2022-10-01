@@ -18,7 +18,20 @@ class FireBase{
         .collection("bot")
         .snapshots()
         .map((event) =>
-        event.docs.map((e) => Bot.fromJson(e.data())).toList());
+        event.docs.map((e){
+          Bot bot = Bot.fromJson(e.data());
+          bot.id=e.id;
+          return bot;
+        }).toList());
+  }
+
+  updateBot(Bot bot)async{
+    final x = await store.collection("bot").doc(bot.id).update(bot.toJson()).onError((error, stackTrace) => false);
+    return true;
+  }
+  deleteBot(Bot bot)async{
+    final x = await store.collection("bot").doc(bot.id).delete().onError((error, stackTrace) => false);
+    return true;
   }
 
 }

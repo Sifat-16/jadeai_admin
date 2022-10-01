@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Bot{
+  String? id;
   String? name;
   double? price;
   double? daily_add;
